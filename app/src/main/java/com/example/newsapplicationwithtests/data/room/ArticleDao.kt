@@ -13,6 +13,6 @@ interface ArticleDao {
     fun getAllArticles() : LiveData<List<Article>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(articles: Article)
+    suspend fun insertAll(articles: List<Article>)
 
 }

@@ -4,6 +4,8 @@ import android.content.Context
 import com.example.newsapplicationwithtests.data.network.NewsRemoteDataSource
 import com.example.newsapplicationwithtests.data.network.NewsService
 import com.example.newsapplicationwithtests.data.room.AppDatabase
+import com.example.newsapplicationwithtests.data.room.ArticleDao
+import com.example.newsapplicationwithtests.domain.repository.ArticleRepository
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -45,4 +47,11 @@ object AppModule {
     @Singleton
     @Provides
     fun provideCharacterDao(db :AppDatabase) = db.articleDao()
+
+    @Singleton
+    @Provides
+    fun provideRepository(
+        remoteDataSource: NewsRemoteDataSource,
+        localDataSource: ArticleDao
+    ) = ArticleRepository(remoteDataSource, localDataSource)
 }
